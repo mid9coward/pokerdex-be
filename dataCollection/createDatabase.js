@@ -28,8 +28,6 @@ const generatePokeDescription = async () => {
   return newDescription;
 };
 
-// console.log("pokemonName", pokemonNames);
-
 const generateFakeData = async () => {
   const newPokemonData = await csv().fromFile("../pokedex.csv");
 
@@ -51,16 +49,12 @@ const generateFakeData = async () => {
   });
   return newAddedData;
 };
-// generateFakeData();
 
 const createDatabase = async () => {
   try {
     let pokemonData = await csv().fromFile("../pokemon.csv");
 
-    // let data = fs.readFileSync("./db.json", "utf-8");
     let pokemonImages = fs.readdirSync("../images");
-
-    // data = JSON.parse(data);
 
     pokemonData = pokemonData.map((pokemon, index) => {
       const id = index + 1;
@@ -118,8 +112,6 @@ const createDatabase = async () => {
       }
       return pokemon;
     });
-
-    // console.log("pokemon", pokemons);
 
     let newData = { data: pokemons, totalPokemons };
 

@@ -41,7 +41,6 @@ router.get(
     try {
       const { page, limit, ...filterQuery } = req.validatedQuery;
 
-      // const result = [];
       const { type, search: name } = filterQuery;
 
       //processing logic
@@ -54,11 +53,6 @@ router.get(
         !type && !name
           ? pokemons
           : pokemons.filter((pokemon) => {
-              // const shouldInclude = name ? pokemon.name === name : true;
-              // return type
-              //   ? pokemon.types.include(type) && shouldInclude
-              //   : shouldInclude;
-
               const isNameValid = name ? pokemon.name === name : true;
               const isTypeValid = type
                 ? pokemon.types.includes(type) && isNameValid
@@ -66,23 +60,6 @@ router.get(
               return isTypeValid;
             });
 
-      // // filter by type
-      // if (type) {
-      //   result = pokemons.filter((pokemon) =>
-      //     pokemon.types.includes(type.toLowerCase())
-      //   );
-      // }
-      // //filter by name
-      // if (name) {
-      //   result = pokemons.filter((pokemon) =>
-      //     pokemon.name.toLowerCase().includes(name.toLowerCase())
-      //   );
-      // }
-      // if no filter, return all pokemons
-      // if (!type && !name) {
-      //   result = pokemons;
-      // }
-      // return the result
       res.status(200).send({
         data: result.slice(offset, offset + limit),
         total: result.length,
